@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MAZFA PAY</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- =========================================================
+    CATATAN EDIT CEPAT (biar gampang rename):
+    - Judul: "MAZFA PAY"
+    - Label: "PREMIUM"
+    - Foto profil: ganti href + src pada .avatarLink
+    - QRIS link: ganti src id="qrisImg"
+    - Nomor ewallet / bank: cari "DATA PAYMENT"
+    - Logo ShopeePay/SeaBank sudah pakai link kamu
+    - Logo lain kosong -> isi src nanti (atau biarin, ada fallback)
+    - Kontak: ganti link Telegram/IG/WA di bagian footer
+    - Musik: taruh file bgm.mp3 (opsional)
+  ========================================================== -->
+
+  <div class="bg" aria-hidden="true">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <div class="bgGrid"></div>
+    <div class="bgNoise"></div>
+  </div>
+
+  <main class="wrap">
+
+    <!-- ===== 1 BOX: PROFIL + JUDUL + MUSIK ===== -->
+    <header class="card hero">
+      <a class="avatarLink" href="https://files.catbox.moe/y57j5l.jpg" target="_blank" rel="noreferrer" aria-label="Profil">
+        <img class="avatar" src="https://files.catbox.moe/y57j5l.jpg" alt="Profil" />
+      </a>
+
+      <div class="heroText">
+        <div class="brand">MAZFA PAY</div>
+        <div class="badge">PREMIUM</div>
+
+        <button id="musicBtn" class="btn" type="button" aria-pressed="false">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="musicLabel">Music: OFF</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== PAYMENT BUTTON (munculin modal) ===== -->
+    <section class="paySection">
+      <button id="openPay" class="payBtn" type="button">
+        Buka Payment
+      </button>
+
+      <!-- ===== BOX CARA PENGGUNAAN ===== -->
+      <div class="card howto">
+        <div class="howTitle">Cara Penggunaan</div>
+        <ol class="howList">
+          <li>Klik <b>Buka Payment</b>.</li>
+          <li>Pilih metode: <b>QRIS</b> / <b>E-Wallet</b> / <b>Bank</b>.</li>
+          <li>Scan / transfer sesuai data, lalu simpan bukti pembayaran.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== KONTAK (rapi) ===== -->
+    <footer class="card contact">
+      <div class="cRow">
+        <a class="cBtn" href="https://t.me/username" target="_blank" rel="noreferrer">Telegram</a>
+        <a class="cBtn" href="https://instagram.com/username" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+      <a class="cBtn cWide" href="https://wa.me/6281234567890" target="_blank" rel="noreferrer">WhatsApp</a>
+    </footer>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- AUDIO -->
+  <audio id="bgm" loop preload="auto">
+    <source src="bgm.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ===== MODAL PAYMENT (QRIS + EWALLET + BANK) ===== -->
+  <div id="overlay" class="overlay" hidden>
+    <div class="backdrop" data-close="1"></div>
+
+    <div class="modal card" role="dialog" aria-modal="true" aria-labelledby="payTitle">
+      <div class="modalTop">
+        <div class="modalTitle" id="payTitle">PAYMENT</div>
+        <button id="closePay" class="miniBtn" type="button">Kembali</button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="Metode Payment">
+        <button class="tabBtn active" type="button" role="tab" data-tab="qris" aria-selected="true">QRIS</button>
+        <button class="tabBtn" type="button" role="tab" data-tab="ewallet" aria-selected="false">E-Wallet</button>
+        <button class="tabBtn" type="button" role="tab" data-tab="bank" aria-selected="false">Bank</button>
+      </div>
+
+      <div class="modalBody">
+        <!-- QRIS -->
+        <section class="pane" id="pane-qris" role="tabpanel">
+          <div class="qWrap">
+            <div class="qFrame">
+              <!-- QRIS LINK DISINI -->
+              <img id="qrisImg" class="qris" src="https://files.catbox.moe/yx04e1.png" alt="QRIS" />
+              <div class="scan" aria-hidden="true"></div>
+            </div>
+
+            <div class="qBtns">
+              <button class="miniBtn actionBtn" type="button" data-action="download-qris">Download</button>
+              <button class="miniBtn ghost actionBtn" type="button" data-action="open" data-url="https://files.catbox.moe/yx04e1.png">Open</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================
+          DATA PAYMENT - E WALLET
+          Isi logo lain nanti kalau sudah ada link
+        ======================= -->
+        <section class="pane" id="pane-ewallet" role="tabpanel" hidden>
+          <div class="gridPay">
+
+            <!-- DANA (logo kosong, nanti kamu isi) -->
+            <div class="payItem">
+              <img class="payLogo" src="" alt="DANA" data-fallback="DANA">
+              <div class="payInfo">
+                <div class="payName">DANA</div>
+                <div class="payVal">081234567890</div>
+              </div>
+              <button class="miniBtn actionBtn" type="button" data-action="copy" data-copy="081234567890">Copy</button>
+            </div>
+
+            <!-- GOPAY (logo kosong) -->
+            <div class="payItem">
+              <img class="payLogo" src="" alt="GoPay" data-fallback="GOPAY">
+              <div class="payInfo">
+                <div class="payName">GoPay</div>
+                <div class="payVal">081234567890</div>
+              </div>
+              <button class="miniBtn actionBtn" type="button" data-action="copy" data-copy="081234567890">Copy</button>
+            </div>
+
+            <!-- SHOPEEPAY (logo asli dari kamu) -->
+            <div class="payItem">
+              <img class="payLogo" src="https://files.catbox.moe/b49gvt.jpg" alt="ShopeePay" data-fallback="SPAY">
+              <div class="payInfo">
+                <div class="payName">ShopeePay</div>
+                <div class="payVal">081234567890</div>
+              </div>
+              <button class="miniBtn actionBtn" type="button" data-action="copy" data-copy="081234567890">Copy</button>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ======================
+          DATA PAYMENT - BANK
+        ======================= -->
+        <section class="pane" id="pane-bank" role="tabpanel" hidden>
+          <div class="gridPay">
+
+            <!-- BRI (logo kosong) -->
+            <div class="payItem">
+              <img class="payLogo" src="" alt="BRI" data-fallback="BRI">
+              <div class="payInfo">
+                <div class="payName">BRI</div>
+                <div class="payVal">1234567890</div>
+                <div class="paySub">MAZFA PAY</div>
+              </div>
+              <button class="miniBtn actionBtn" type="button" data-action="copy" data-copy="1234567890">Copy</button>
+            </div>
+
+            <!-- SEABANK (logo asli dari kamu) -->
+            <div class="payItem">
+              <img class="payLogo" src="https://files.catbox.moe/74ugm3.jpg" alt="SeaBank" data-fallback="SEA">
+              <div class="payInfo">
+                <div class="payName">SeaBank</div>
+                <div class="payVal">9876543210</div>
+                <div class="paySub">MAZFA PAY</div>
+              </div>
+              <button class="miniBtn actionBtn" type="button" data-action="copy" data-copy="9876543210">Copy</button>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <div class="modalNote">
+        Tips: tombol <b>Copy</b> otomatis menyalin nomor/rek.
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

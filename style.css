@@ -1,0 +1,599 @@
+:root{
+  /* === DIGITAL DARK THEME === */
+  --bgA:#020814;
+  --bgB:#050f24;
+
+  --card: rgba(10,18,40,.75);
+  --stroke: rgba(90,160,255,.22);
+
+  --text:#eaf2ff;
+  --muted:#8fa8d8;
+
+  --neon:#2aa8ff;
+  --neon2:#6c7cff;
+
+  --shadow: 0 25px 90px rgba(0,0,0,.75);
+
+  --r: 22px;
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  width:100%;
+}
+
+body{
+  margin:0;
+  font-family:var(--font);
+  color:var(--text);
+  background:
+    radial-gradient(900px 600px at 10% 0%, rgba(42,168,255,.15), transparent 60%),
+    radial-gradient(700px 700px at 90% 90%, rgba(108,124,255,.12), transparent 60%),
+    linear-gradient(180deg, var(--bgA), var(--bgB));
+
+  overflow-x:hidden;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+/* ================= BACKGROUND EFFECT ================= */
+
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+}
+
+.bg1{
+  position:absolute;
+  width:900px;
+  height:900px;
+  left:-300px;
+  top:-400px;
+
+  background: radial-gradient(circle,
+    rgba(42,168,255,.35),
+    transparent 65%);
+  filter: blur(120px);
+}
+
+.bg2{
+  position:absolute;
+  width:900px;
+  height:900px;
+  right:-350px;
+  bottom:-400px;
+
+  background: radial-gradient(circle,
+    rgba(108,124,255,.28),
+    transparent 65%);
+  filter: blur(120px);
+}
+
+.bgGrid{
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+
+  background-size: 90px 90px;
+  opacity:.18;
+}
+
+.bgNoise{
+  position:absolute;
+  inset:0;
+
+  background-image:
+    radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+
+  background-size: 18px 18px;
+  opacity:.04;
+}
+
+/* ================= LAYOUT ================= */
+
+.wrap{
+  max-width:520px;
+  width:100%;
+  margin:0 auto;
+  padding:16px 14px 28px;
+}
+
+/* ================= CARD (GLASS NEON) ================= */
+
+.card{
+  background: var(--card);
+
+  border: 1px solid var(--stroke);
+  border-radius: var(--r);
+
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+
+  backdrop-filter: blur(16px);
+
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+
+  background:
+    radial-gradient(240px 80px at 15% 10%, rgba(42,168,255,.35), transparent 60%),
+    radial-gradient(260px 100px at 85% 90%, rgba(108,124,255,.28), transparent 60%);
+
+  pointer-events:none;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  padding:14px;
+
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.avatarLink{
+  width:92px;
+  height:92px;
+
+  border-radius:22px;
+  overflow:hidden;
+
+  border:1px solid var(--stroke);
+
+  background:#000;
+  box-shadow: 0 0 25px rgba(42,168,255,.25);
+
+  flex:0 0 auto;
+}
+
+.avatar{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.heroText{
+  flex:1;
+  min-width:0;
+}
+
+.brand{
+  font-weight:900;
+  letter-spacing:.12em;
+  font-size:20px;
+
+  color:var(--neon);
+
+  text-shadow:
+    0 0 12px rgba(42,168,255,.8),
+    0 0 24px rgba(42,168,255,.4);
+}
+
+.badge{
+  margin-top:6px;
+
+  display:inline-flex;
+  padding:6px 12px;
+
+  border-radius:999px;
+
+  border:1px solid rgba(42,168,255,.35);
+
+  background:
+    linear-gradient(180deg,
+      rgba(42,168,255,.22),
+      rgba(42,168,255,.06));
+
+  color:#b8d7ff;
+
+  font-size:11px;
+  letter-spacing:.22em;
+}
+
+/* ================= MUSIC BUTTON ================= */
+
+.btn{
+  margin-top:12px;
+  width:100%;
+
+  border:1px solid rgba(42,168,255,.45);
+
+  background:
+    linear-gradient(180deg,
+      rgba(10,25,50,.9),
+      rgba(5,12,30,.9));
+
+  color:var(--text);
+
+  padding:12px;
+
+  border-radius:18px;
+
+  cursor:pointer;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+
+  font-weight:900;
+  letter-spacing:.05em;
+
+  transition:.15s ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 0 4px rgba(42,168,255,.18),
+    0 0 25px rgba(42,168,255,.45);
+}
+
+.dot{
+  width:10px;
+  height:10px;
+
+  border-radius:999px;
+
+  background:#566080;
+}
+
+.dot.on{
+  background:var(--neon);
+
+  box-shadow:
+    0 0 8px var(--neon),
+    0 0 18px var(--neon);
+}
+
+/* ================= PAYMENT BUTTON ================= */
+
+.paySection{
+  margin-top:14px;
+  display:grid;
+  gap:12px;
+}
+
+.payBtn{
+  width:100%;
+
+  padding:16px;
+
+  border-radius:22px;
+
+  border:1px solid rgba(108,124,255,.45);
+
+  background:
+    linear-gradient(135deg,
+      rgba(42,168,255,.25),
+      rgba(108,124,255,.25));
+
+  color:#fff;
+
+  font-weight:900;
+  letter-spacing:.12em;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 30px rgba(42,168,255,.35);
+
+  transition:.15s ease;
+}
+
+.payBtn:hover{
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 0 4px rgba(42,168,255,.18),
+    0 0 40px rgba(108,124,255,.6);
+}
+
+/* ================= HOW TO ================= */
+
+.howto{
+  padding:14px;
+}
+
+.howTitle{
+  font-weight:900;
+  letter-spacing:.08em;
+
+  color:var(--neon);
+}
+
+.howList{
+  margin:8px 0 0;
+  padding-left:18px;
+
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+  margin-top:14px;
+  padding:14px;
+}
+
+.cRow{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.cBtn{
+  border:1px solid rgba(42,168,255,.35);
+
+  background:
+    linear-gradient(180deg,
+      rgba(10,25,50,.9),
+      rgba(5,12,30,.9));
+
+  border-radius:18px;
+
+  padding:12px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-weight:900;
+
+  transition:.15s ease;
+}
+
+.cBtn:hover{
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 0 4px rgba(42,168,255,.18),
+    0 0 25px rgba(42,168,255,.45);
+}
+
+.cWide{
+  margin-top:10px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+
+  left:50%;
+  bottom:16px;
+
+  transform:translateX(-50%);
+
+  background:rgba(0,0,0,.9);
+
+  color:#fff;
+
+  border-radius:999px;
+
+  padding:10px 14px;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.2s ease;
+
+  box-shadow:
+    0 0 20px rgba(42,168,255,.4);
+
+  z-index:60;
+}
+
+.toast.show{
+  opacity:1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* ================= MODAL PAYMENT (WAJIB ADA) ================= */
+
+.overlay{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px;
+}
+
+.overlay[hidden]{
+  display: none !important;
+}
+
+.backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(10px);
+}
+
+/* modal ikut style .card yang sudah kamu punya */
+.modal{
+  position: relative;
+  width: min(640px, 100%);
+  max-height: 85vh;
+  overflow: auto;
+
+  border-radius: var(--r);
+}
+
+/* header modal */
+.modalTop{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.modalTitle{
+  font-weight: 950;
+  letter-spacing: .14em;
+  color: var(--neon);
+  text-shadow: 0 0 12px rgba(42,168,255,.45);
+}
+
+.modalBody{
+  padding: 12px;
+}
+
+/* tabs */
+.tabs{
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  padding-bottom: 0;
+}
+
+.tabBtn{
+  flex: 1;
+  border: 1px solid rgba(42,168,255,.35);
+  background: rgba(0,0,0,.20);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 10px 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: .15s ease;
+}
+
+.tabBtn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 4px rgba(42,168,255,.14);
+}
+
+.tabBtn.active{
+  background: linear-gradient(135deg, rgba(42,168,255,.22), rgba(108,124,255,.18));
+  box-shadow: 0 0 0 4px rgba(42,168,255,.12), 0 0 25px rgba(42,168,255,.25);
+}
+
+/* QR panel */
+.qFrame{
+  border: 1px solid rgba(42,168,255,.22);
+  background: rgba(0,0,0,.18);
+  border-radius: 18px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.qris{
+  width: 100%;
+  border-radius: 16px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.scan{
+  position:absolute;
+  left: 16px; right: 16px;
+  top: 18%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(42,168,255,.95), transparent);
+  filter: drop-shadow(0 0 10px rgba(42,168,255,.55));
+  animation: scan 2.2s ease-in-out infinite;
+  opacity:.85;
+}
+
+@keyframes scan{
+  0%{ transform: translateY(0); opacity:.35 }
+  50%{ transform: translateY(260px); opacity: 1 }
+  100%{ transform: translateY(0); opacity:.35 }
+}
+
+.qBtns{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 10px;
+}
+
+/* pay list di modal */
+.gridPay{
+  display:grid;
+  gap:10px;
+}
+
+.payItem{
+  border: 1px solid rgba(42,168,255,.18);
+  background: rgba(0,0,0,.16);
+  border-radius: 18px;
+  padding: 12px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.payLogo{
+  width:44px;
+  height:44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.06);
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+
+.payInfo{ flex:1; min-width:0; }
+.payName{ font-weight: 950; letter-spacing:.06em; }
+.payVal{ margin-top: 6px; color: var(--muted); font-weight: 900; }
+.paySub{ margin-top: 6px; color: var(--muted); font-size: 12px; }
+
+/* mini button untuk modal */
+.miniBtn{
+  border:1px solid rgba(42,168,255,.35);
+  background: rgba(0,0,0,.20);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 10px 12px;
+  cursor:pointer;
+  font-weight: 900;
+  transition: .15s ease;
+}
+
+.miniBtn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 4px rgba(42,168,255,.14);
+}
+
+.miniBtn.ghost{
+  background: transparent;
+}
